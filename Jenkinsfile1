@@ -17,12 +17,12 @@ node("node1")
       sh "scp -o strictHostKeyChecking=no target/maven-web-application.war ec2-user@65.0.20.217:/opt/apache-tomcat-9.0.46/webapps/"
     }
     }
-     stage ('Genarating Mail')
+     /*stage ('Genarating Mail')
      {
          mail bcc: 'navyaguntupalli1@gmail.com', body: '''Hi Navya,
 
          Build is successfully.
 
 Thanks..!!''', cc: 'navyaguntupalli1@gmail.com', from: '', replyTo: '', subject: 'Build Status', to: 'navyaguntupalli1@gmail.com'
-     }
+     }*/
 }
