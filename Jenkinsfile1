@@ -1,0 +1,28 @@
+node
+{
+    def homeMaven = tool name : 'maven 3.6.3'
+    
+    stage ('Git checkout')
+    {
+    git branch: 'development', credentialsId: '761377a7-e1ba-48ef-9c73-d04a0edc9397', url: 'https://github.com/navya-devops-applications/maven-web-application.git'
+    }
+    stage ('Build package')
+    {
+        sh "${homeMaven}/bin/mvn clean package"
+    }
+    stage ('deploying')
+    {
+        sshagent(['32571b40-13b5-478c-8c9a-7f809203955f'])
+        {
+      sh "scp -o strictHostKeyChecking=no target/maven-web-application.war ec2-user@65.0.20.217:/opt/apache-tomcat-9.0.46/webapps/"
+    }
+    }
+     stage ('Genarating Mail')
+     {
+         mail bcc: 'navyaguntupalli1@gmail.com', body: '''Hi Navya,
+
+         Build is successfully.
+
+Thanks..!!''', cc: 'navyaguntupalli1@gmail.com', from: '', replyTo: '', subject: 'Build Status', to: 'navyaguntupalli1@gmail.com'
+     }
+}
