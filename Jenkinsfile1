@@ -1,4 +1,4 @@
-node(node1)
+node("node1")
 {
     def homeMaven = tool name : 'maven 3.6.3'
     properties([pipelineTriggers([githubPush()])])
