@@ -1,7 +1,6 @@
 node
 {
     def homeMaven = tool name : 'maven 3.6.3'
-    properties([pipelineTriggers([githubPush()])])
     stage ('Git checkout')
     {
     git branch: 'development', credentialsId: '761377a7-e1ba-48ef-9c73-d04a0edc9397', url: 'https://github.com/navya-devops-applications/maven-web-application.git'
